@@ -1,0 +1,39 @@
+Решения на задачите от Exercise1-theory.md
+
+
+Задача 1 :
+#include <iostream.h>
+using namespace std;
+
+int main() {
+  cout << "a, b = ";
+  int a,b;
+  cin >> a, b;
+  cout << "The product of " << a << "and" << b  << "is: " << a*b << "\n" ;
+  return 0;
+}
+
+
+Задача 2
+Кои от следните редици от символи са правилно записани аритметични изрази на езика С++:
+а) 1 + |y| -> не
+б) -abs(x) + sin z  -> не
+в) abs(x) + cos(fabs(y - 1.7)) -> да
+г) 1 + sqrt(sin((u+v) / 10)) -> да
+д) -6 + xy  -> не 
+е) 1/-2 + Beta  -> да
+
+
+Задача 3 :
+#include <iostream.h>
+using namespace std;
+
+int main() {
+  int x = 6;
+  int y = -12;
+  cout << "\n" << x + y << " " << x * y << "\n";
+  return 0;
+}
+Решение : 
+1. трябва да се добави след cout -> << 
+2. добавяне на using namespace std;
