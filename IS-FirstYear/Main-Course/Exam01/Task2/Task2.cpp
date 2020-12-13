@@ -20,5 +20,5 @@ int main()
 		}
 		result++;
 	} while (n != 1);
-	cout << "The result is: " << result << endl;
+	cout << "The result is: " << result + n<< endl;
 }
