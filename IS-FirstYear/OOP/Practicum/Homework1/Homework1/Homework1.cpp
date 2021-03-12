@@ -15,7 +15,10 @@ public:
     // default constructor
     Jedi()
     {
-
+        this->name = nullptr;
+        this->midi_chlorian = 0.0;
+        this->spicies = nullptr;
+        this->militaryRank = nullptr;
     }
 
     // copy constructor
@@ -30,8 +33,8 @@ public:
     }
 
     // parametric constructor
-    Jedi(char* name, Rank& rank, double midi_chlorian, Planet& planet,
-         char* spicies, char* militaryRank)
+    Jedi(const char* name, const Rank& rank, const double midi_chlorian, const Planet& planet,
+        const char* spicies, const char* militaryRank)
     {
         set_name(name);
         set_rank(rank);
@@ -112,11 +115,14 @@ public:
             this->militaryRank = new char[strlen(jedi.militaryRank) + 1];
             strcpy(this->militaryRank, jedi.militaryRank);
         }
+
+        return *this;
     }
 
     void print() const {
-        cout << "Name: " << name << "Rank: " << rankToString(rank)
-            << "Midi Chlorian: " << midi_chlorian;
+        cout << "Name: " << name << "Rank: ";
+        printRank(rank);
+        cout << "Midi Chlorian: " << midi_chlorian;
         planet.print();
         cout << "Spicies: " << spicies << "Military rank" << militaryRank;
     }
@@ -128,12 +134,21 @@ public:
         midi_chlorian = 0.00;
         delete[] spicies;
         delete[] militaryRank;
+
+        this->name = nullptr;
+        this->spicies = nullptr;
+        this->militaryRank = nullptr;
     };
 };
 
 enum Rank
 {
-
+    service_corps,
+    knight,
+    consular,
+    guardian,
+    sentinel,
+    master
 };
 
 class Stromtrooper {
@@ -146,7 +161,8 @@ public:
     // default constructor
     Stromtrooper()
     {
-
+        this->id = nullptr;
+        this->type = nullptr;
     }
 
     // copy constructor
@@ -159,7 +175,7 @@ public:
     }
 
     // parametric constructor
-    Stromtrooper(char* id, Rank& rank, char* type, Planet& planet)
+    Stromtrooper(const char* id, const Rank& rank, const char* type, const Planet& planet)
     {
         set_id(id);
         set_rank(rank);
@@ -217,11 +233,14 @@ public:
             this->planet = stromtrooper.planet;
 
         }
+
+        return *this;
     }
 
     void print() const{
-        cout << "Id: " << id << "Rank: " << rankToString(rank)
-            << "Type: " << type;
+        cout << "Id: " << id << "Rank: ";
+        printRank(rank);
+        cout << "Type: " << type;
         planet.print();
     }
 
@@ -230,6 +249,9 @@ public:
     {
         delete[] id;
         delete[] type;
+
+        this->id = nullptr;
+        this->type = nullptr;
     };
 };
 
@@ -243,7 +265,9 @@ public:
     // default constructor
     Planet()
     {
-
+        this->name = nullptr;
+        this->planetSystem = nullptr;
+        this->republic = nullptr;
     }
 
     // copy constructor
@@ -255,7 +279,7 @@ public:
     }
 
     // parametric constructor
-    Planet(char* name, char* planetSystem, char* republic)
+    Planet(const char* name, const char* planetSystem, const char* republic)
     {
         set_name(name);
         set_planetSystem(planetSystem);
@@ -309,6 +333,8 @@ public:
             this->republic = new char[strlen(planet.republic) + 1];
             strcpy(this->republic, planet.republic);
         }
+
+        return *this;
     }
 
     // destructor
@@ -316,12 +342,39 @@ public:
         delete[] name;
         delete[] planetSystem;
         delete[] republic;
+
+        this->name = nullptr;
+        this->planetSystem = nullptr;
+        this->republic = nullptr;
     };
 };
 
 
-char* rankToString(Rank rank) {
-    // TODO: with switch case
+void printRank(Rank rank) {
+    switch (rank)
+    {
+    case service_corps:
+         cout << "Service Corps";
+        break;
+    case knight:
+        cout << "Knight";
+        break;
+    case consular:
+        cout << "Consular";
+        break;
+    case guardian:
+        cout << "Guardian";
+        break;
+    case sentinel:
+        cout << "Sentinel";
+        break;
+    case master:
+        cout << "Master";
+        break;
+    default:
+        cout << "Without rank";
+        break;
+    }
 }
 
 int main()
