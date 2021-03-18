@@ -18,5 +18,34 @@
     <ClCompile Include="Homework1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Jedi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Planet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stormtrooper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Jedi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlanetType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JediRank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StormtrooperRank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stormtrooper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
