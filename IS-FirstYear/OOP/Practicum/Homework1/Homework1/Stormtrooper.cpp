@@ -63,22 +63,27 @@ Stormtrooper& Stormtrooper::operator = (const Stormtrooper& stromtrooper) {
     if (this != &stromtrooper)
     {
         delete[] id;
-        size_t length_id = strlen(stromtrooper.id) + 1;
-        this->id = new char[length_id];
-        strcpy_s(this->id, length_id, stromtrooper.id);
+        size_t lengthId = strlen(stromtrooper.id) + 1;
+        this->id = new char[lengthId];
+        strcpy_s(this->id, lengthId, stromtrooper.id);
 
         this->rank = stromtrooper.rank;
 
         delete[] type;
-        size_t length_type = strlen(stromtrooper.type) + 1;
-        this->type = new char[length_type];
-        strcpy_s(this->type, length_type, stromtrooper.type);
+        size_t lengthType = strlen(stromtrooper.type) + 1;
+        this->type = new char[lengthType];
+        strcpy_s(this->type, lengthType, stromtrooper.type);
 
         this->planet = stromtrooper.planet;
 
     }
 
     return *this;
+}
+
+void Stormtrooper::print() const
+{
+    cout << this;
 }
 
 std::ostream& operator<<(std::ostream& os, Stormtrooper& stormtrooper) {
@@ -97,11 +102,6 @@ std::ostream& operator<<(std::ostream& os, Stormtrooper& stormtrooper) {
     os << stormtrooper.planet.getName() << endl;
     return os;
 }
-
-/*
-void Stormtrooper::print() const {
-    cout << this;
-}*/
 
 Stormtrooper::~Stormtrooper() {
     delete[] id;

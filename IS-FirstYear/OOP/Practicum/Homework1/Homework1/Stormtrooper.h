@@ -3,7 +3,6 @@
 #include <cstring>
 
 #include "Planet.h"
-#include "JediRank.h"
 #include "StormtrooperRank.h"
 
 using namespace std;
@@ -15,32 +14,25 @@ private:
     Planet planet;
 
 public:
-    // default constructor
     Stormtrooper();
-    // copy constructor
     Stormtrooper(const Stormtrooper& stromtrooper);
-    // parametric constructor
     Stormtrooper(const char* id, const StormtrooperRank& rank, const char* type, const Planet& planet);
+    ~Stormtrooper();
 
     void setId(const char* id);
-    char* getId();
-
     void setRank(const StormtrooperRank rank);
-    StormtrooperRank getRank();
-
     void setType(const char* type);
-    char* getType();
-
     void setPlanet(const Planet planet);
+
+    char* getId();
+    StormtrooperRank getRank();
+    char* getType();
     Planet getPlanet();
 
-    // operators
     Stormtrooper& operator = (const Stormtrooper& stromtrooper);
+
     friend std::ostream& operator<<(std::ostream& os, Stormtrooper& stormtrooper);
 
-    // methods
     void print() const;
 
-    // destructor
-    ~Stormtrooper();
 };
