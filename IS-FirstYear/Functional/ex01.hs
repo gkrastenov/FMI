@@ -15,24 +15,35 @@ main = do
     print (factIter 0)
     print (factIter 1)
     print (fibIter 40)
+    print(isPrime 3)
 
-n :: Integer -- Int
+n :: Int -- Int
 n = 1
 
 f1 :: Double -> Double -> Double
 f1 a b = a * b
 
-fact :: Integer -> Integer
+fact :: Int -> Int
 fact n = if n == 0 then 1 else n * (fact (n - 1))
 -- fact n -> n * fact (n - 1) -> n * (n - 1) * fact (n - 2) -> ...
 -- ... -> n * (n - 1) * ... * 2  * 1 * 1 -> ...
 
-factIter :: Integer -> Integer
+factIter :: Int -> Int
 factIter n = helper n 1
 
-helper :: Integer -> Integer -> Integer
+helper :: Int -> Int -> Int
 helper i res =
     if i == 0 then res else helper (i - 1) (res * i)
+
+
+isPrime :: Int -> Bool
+isPrime 1 = False
+isPrime n = helper 2
+    where
+        helper d
+            | d == n       = True
+            | mod n d == 0 = False
+            | otherwise    = helper (d + 1)
 
 -- factIter n -> helper n 1 -> helper (n - 1) (n * 1) -> ...
 -- ... -> helper 0 (n * (n - 1) * (n - 2) * ... * 2 * 1 * 1) -> ...
@@ -60,10 +71,10 @@ fib(n) = {1                       , n <= 1
 
 -}
 
-fibRec :: Integer -> Integer
+fibRec :: Int -> Int
 fibRec n = if n <= 1 then 1 else fibRec (n - 2) + fibRec (n - 1)
 
-fibIter :: Integer -> Integer
+fibIter :: Int -> Int
 fibIter n = helper 1 1 n
     where
         helper a b n = if n < 2 then b else helper b (a + b) (n - 1)
