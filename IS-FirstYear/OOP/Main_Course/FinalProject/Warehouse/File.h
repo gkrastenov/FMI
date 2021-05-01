@@ -2,19 +2,21 @@
 class File
 {
 private:
-	char* name;
+	char* fileName;
 	bool isOpen;
+	bool isCreated;
+
 public:
 	File();
 	File(const char* name);
 	~File();
 
 	void create();
-	void open();
-	void close();
-	void save();
-	void saveAs();
-	void help();
-	void exit();
+	bool open();
+	bool close();
+	bool save();
+	bool saveAs();
+	bool help();
+	bool exit();
 };
 
