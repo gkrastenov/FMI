@@ -3,7 +3,8 @@
 enum Unit
 {
 	Kilograms,
-	Liters
+	Liters,
+	Unknown
 };
 
 class Product
@@ -13,6 +14,7 @@ private:
 	DateTime expiryDate;
 	DateTime entryDate;
 	char* manufacturer;
+	Unit unit;
 	int quantity;
 	int location;
 	char* comment;
