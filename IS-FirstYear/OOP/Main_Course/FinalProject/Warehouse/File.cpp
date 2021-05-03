@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <filesystem>
 #include <string>
-
+#include <chrono>
+#include <ctime>  
+#pragma warning(disable : 4996)
 #include "File.h"
 
 using namespace std;
@@ -82,7 +84,8 @@ bool File::add()
 		products[count] = product;
 		count++;
 	}
-	write();
+
+	write(fileName);
 	return true;
 }
 
@@ -109,9 +112,9 @@ void File::setFileName(const char* name) {
 	strcpy_s(this->fileName, lengthName, name);
 }
 
-void File::write() {
+void File::write(const char* fileName) {
 	ofstream myfile;
-	myfile.open("warehouse.txt");
+	myfile.open(fileName);
 	for (size_t i = 0; i < count; i++)
 	{
 		myfile << products[i].getDescription() << endl;
@@ -154,29 +157,9 @@ bool File::print()
 	{
 		cout << endl;
 		cout << "product " << i << endl;
-		cout << "Description : " << products[i].getDescription() << endl;
-
-		DateTime currDate = products[i].getExpiryDate();
-		cout << "Expiry Date : ";
-		cout <<  currDate.getYear() << '/' << currDate.getMonth() << '/'
-			<< currDate.getDay() << endl;
-
-		cout << "Entry Date : ";
-		currDate = products[i].getEntryDate();
-		cout << currDate.getYear() << '/' << currDate.getMonth() << '/'
-			<< currDate.getDay() << endl;
-
-		cout << "Manufacturer: ";
-		cout << products[i].getManufacturer() << endl;
-		cout << "Unit : ";
-		products[i].printUnit(products[i].getUnit());
-		cout << "Quantity : ";
-		cout << products[i].getQuantity() << endl;
-		cout << "Location : ";
-		cout << products[i].getLocation() << endl;
-		cout << "Comment : ";
-		cout << products[i].getComment() << endl;
+		products[i].printProduct();
 	}
+
 	return true;
 }
 
@@ -215,6 +198,10 @@ bool File::menu()
 	{
 		return print();
 	}
+	if (compareStrings(consoleCommand, "clean", getSize(consoleCommand), 5))
+	{
+		return clean();
+	}
 
 	cout << "Invalid command" << endl;
 	return true;
@@ -225,6 +212,7 @@ void File::menuView()
 	cout << "-------- Menu --------" << endl;
 	cout << "Add (add)" << endl;
 	cout << "Print (print)" << endl;
+	cout << "Exit (clean)" << endl;
 	cout << "Save As (save as)" << endl;
 	cout << "Help (help)" << endl;
 	cout << "Exit (exit)" << endl;
@@ -294,6 +282,37 @@ bool File::saveAs()
 	cin.getline(name, 20);
 
 	ofstream MyFile(name);
-	write();
+	write(name);
 	return true;
+}
+
+bool File::clean()
+{
+	std::time_t time = std::time(0);   // get time now
+	std::tm* now = std::localtime(&time);
+	DateTime dateNow = DateTime((now->tm_year + 1900), (now->tm_mon + 1), now->tm_mday);
+
+	cout << "Cleanning: " << endl;
+	int index = 0;
+	while (index<count)
+	{
+		if (products[index].getExpiryDate() <= dateNow)
+		{
+			cout << "Product: " << endl;
+			products[index].printProduct();
+			removeProduct(index);
+		}
+		index++;
+	}
+
+	return true;
+}
+
+void File::removeProduct(const size_t index)
+{
+	count--;
+	for (size_t i = index; i < count; i++)
+	{
+		products[i] = products[i + 1];
+	}
 }

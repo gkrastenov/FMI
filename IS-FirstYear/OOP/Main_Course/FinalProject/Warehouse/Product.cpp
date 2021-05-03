@@ -3,6 +3,7 @@
 #include<iostream>
 
 #include "Product.h"
+using namespace std;
 
 Product::Product()
 {
@@ -111,7 +112,7 @@ bool Product::setExpiryDate(const char* expiryDate) {
             index++;
         }
     }
-    this->expiryDate = DateTime(date);
+    this->expiryDate = DateTime(date[0], date[1], date[2]);
     return true;
 }
 
@@ -164,7 +165,7 @@ bool Product::setEntryDate(const char* entryDate) {
             index++;
         }
     }
-    this->entryDate = DateTime(date);
+    this->entryDate = DateTime(date[0], date[1], date[2]);
     return true;
 }
 
@@ -255,6 +256,31 @@ Unit Product::getUnit() {
     return unit;
 }
 
+void Product::printProduct()
+{
+    cout << "Description : " << this->getDescription() << endl;
+
+    DateTime currDate = this->getExpiryDate();
+    cout << "Expiry Date : ";
+    cout << currDate.getYear() << '/' << currDate.getMonth() << '/'
+        << currDate.getDay() << endl;
+
+    cout << "Entry Date : ";
+    currDate = this->getEntryDate();
+    cout << currDate.getYear() << '/' << currDate.getMonth() << '/'
+        << currDate.getDay() << endl;
+
+    cout << "Manufacturer: ";
+    cout << this->getManufacturer() << endl;
+    cout << "Unit : ";
+    this->printUnit(this->getUnit());
+    cout << "Quantity : ";
+    cout << this->getQuantity() << endl;
+    cout << "Location : ";
+    cout << this->getLocation() << endl;
+    cout << "Comment : ";
+    cout << this->getComment() << endl;
+}
 Product& Product::operator = (const Product& product) {
     if (this != &product)
     {

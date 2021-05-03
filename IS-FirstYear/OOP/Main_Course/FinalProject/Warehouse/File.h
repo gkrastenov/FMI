@@ -15,7 +15,7 @@ private:
 	int capacity;
 
 	char* enterString(const size_t length);
-	void write();
+	void write(const char* fileName);
 	void read();
 	void menuView();
 	bool compareStrings(const char* input, const char* source,
@@ -28,11 +28,13 @@ public:
 
 	void initialCreate();
 	bool add();
+	void removeProduct(const size_t index);
 	bool print();
 	bool exit();
 	bool help();
 	bool saveAs();
-	
+	bool clean();
+
 	bool menu();
 	void setFileName(const char* name);
 	char* getFileName();

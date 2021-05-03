@@ -8,12 +8,12 @@ DateTime::DateTime()
 	month = 0;
 	year = 0;
 }
-DateTime::DateTime(const int* date)
-{
-	day = date[0];
-	month = date[1];
-	year = date[2];
 
+DateTime::DateTime(const int year, const int month, const int day)
+{
+	this->day = day;
+	this->month = month;
+	this->year = year;
 }
 
 DateTime::~DateTime()
@@ -46,4 +46,10 @@ DateTime& DateTime::operator = (const DateTime& dateTime) {
 		this->day = dateTime.day;
     }
     return *this;
+}
+
+bool DateTime::operator <= (const DateTime& dateTime) {
+	return (this->getDay() <= dateTime.day) 
+		&& (this->getMonth() <= dateTime.month)
+		&& (this->getYear() <= dateTime.year);
 }

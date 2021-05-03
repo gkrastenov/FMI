@@ -17,7 +17,7 @@ private:
 
 public:
 	DateTime();
-	DateTime(const int* date);
+	DateTime(const int year, const int month, const int day);
 	~DateTime();
 
 	int getDay();
@@ -25,5 +25,7 @@ public:
 	int getYear();
 
 	DateTime& operator = (const DateTime& date);
+	bool operator <= (const DateTime& date);
+
 };
 
