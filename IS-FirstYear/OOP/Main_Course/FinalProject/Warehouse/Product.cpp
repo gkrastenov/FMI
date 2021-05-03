@@ -1,6 +1,8 @@
-#include "Product.h"
 #include<cstring>
 #include <math.h>   
+#include<iostream>
+
+#include "Product.h"
 
 Product::Product()
 {
@@ -219,25 +221,36 @@ int Product::charToInt(const char symbol)
    return (int)symbol - 48;
 }
 
-char* Product::unitToString(const Unit unit) {
-    // TODO :: Optimizing
-    char kilo[] = "Kilograms";
-    char liter[] = "Liters";
-    char other[] = "Unknown";
-
+int Product::unitToNumber(const Unit unit) {
     switch (unit)
     {
       case Kilograms:
-        return kilo;
+        return 0;
 
       case Liters:
-          return liter;
+          return 1;
 
     default:
-        return other;
+        return 2;
     }
 }
 
+void Product::printUnit(const Unit unit) {
+    switch (unit)
+    {
+    case Kilograms:
+        std::cout << "Kilograms" << std::endl;
+        break;
+
+    case Liters:
+        std::cout << "Liters" << std::endl;
+        break;
+
+    default:
+        std::cout << "Unknown" << std::endl;
+        break;
+    }
+}
 Unit Product::getUnit() {
     return unit;
 }

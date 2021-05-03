@@ -1,5 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <filesystem>
+#include <string>
+
 #include "File.h"
 
 using namespace std;
@@ -29,6 +33,7 @@ File::~File()
 	count = 0;
 	capacity = 0;
 }
+
 bool File::add()
 {
 	Product product = Product();
@@ -77,7 +82,6 @@ bool File::add()
 		products[count] = product;
 		count++;
 	}
-	print();
 	write();
 	return true;
 }
@@ -105,7 +109,7 @@ void File::setFileName(const char* name) {
 	strcpy_s(this->fileName, lengthName, name);
 }
 
-bool File::write() {
+void File::write() {
 	ofstream myfile;
 	myfile.open("warehouse.txt");
 	for (size_t i = 0; i < count; i++)
@@ -121,21 +125,57 @@ bool File::write() {
 			<< currDate.getDay() << endl;
 
 		myfile << products[i].getManufacturer() << endl;
-		myfile << products[i].unitToString(products[i].getUnit()) << endl;
+		myfile << products[i].unitToNumber(products[i].getUnit()) << endl;
 		myfile << products[i].getQuantity() << endl;
 		myfile << products[i].getLocation() << endl;
 		myfile << products[i].getComment() << endl;
 	}
 	
 	myfile.close();
-	return true;
+}
+
+void File::read()
+{
+	string line;
+	ifstream myfile("warehouse.txt");
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			cout << line << '\n';
+		}
+		myfile.close();
+	}
 }
 
 bool File::print()
 {
 	for (size_t i = 0; i < count; i++)
 	{
-		std::cout << products[i].getDescription();
+		cout << endl;
+		cout << "product " << i << endl;
+		cout << "Description : " << products[i].getDescription() << endl;
+
+		DateTime currDate = products[i].getExpiryDate();
+		cout << "Expiry Date : ";
+		cout <<  currDate.getYear() << '/' << currDate.getMonth() << '/'
+			<< currDate.getDay() << endl;
+
+		cout << "Entry Date : ";
+		currDate = products[i].getEntryDate();
+		cout << currDate.getYear() << '/' << currDate.getMonth() << '/'
+			<< currDate.getDay() << endl;
+
+		cout << "Manufacturer: ";
+		cout << products[i].getManufacturer() << endl;
+		cout << "Unit : ";
+		products[i].printUnit(products[i].getUnit());
+		cout << "Quantity : ";
+		cout << products[i].getQuantity() << endl;
+		cout << "Location : ";
+		cout << products[i].getLocation() << endl;
+		cout << "Comment : ";
+		cout << products[i].getComment() << endl;
 	}
 	return true;
 }
@@ -149,10 +189,35 @@ bool File::menu()
 
 	if (compareStrings(consoleCommand, "add", getSize(consoleCommand), 3))
 	{
-		return add();
+		if (add())
+		{
+			cout << "has been added new product" << endl;;
+			return true;
+		}
+		else {
+			cout << "Has not been added new product" << endl;;
+			return false;
+		}
+	}
+	if (compareStrings(consoleCommand, "exit", getSize(consoleCommand), 4))
+	{
+		return exit();
+	}
+	if (compareStrings(consoleCommand, "help", getSize(consoleCommand), 4))
+	{
+		return help();
+	}
+	if (compareStrings(consoleCommand, "save as", getSize(consoleCommand), 7))
+	{
+		return saveAs();
+	}
+	if (compareStrings(consoleCommand, "print", getSize(consoleCommand), 5))
+	{
+		return print();
 	}
 
-	return false;
+	cout << "Invalid command" << endl;
+	return true;
 }
 
 void File::menuView()
@@ -160,6 +225,7 @@ void File::menuView()
 	cout << "-------- Menu --------" << endl;
 	cout << "Add (add)" << endl;
 	cout << "Print (print)" << endl;
+	cout << "Save As (save as)" << endl;
 	cout << "Help (help)" << endl;
 	cout << "Exit (exit)" << endl;
 }
@@ -192,4 +258,42 @@ size_t File::getSize(const char* source)
 	}
 
 	return index;
+}
+
+bool File::exit()
+{
+	cout << "Exit successfully." << endl;
+	return false;
+}
+
+bool File::help()
+{
+	cout << "add : Add a new product to the warehouse" << endl;
+	cout << "print : Displays information about the products available in the warehouse" << endl;
+	cout << "save as : Save warehouse in other file" << endl;
+	cout << "exit : Exit from the program" << endl;
+
+	return true;
+}
+
+bool File::isExists(const char* fileName)
+{
+	fstream fileStream;
+	fileStream.open(fileName);
+	if (fileStream.fail()) {
+		return false;
+	}
+	return true;
+}
+
+bool File::saveAs()
+{
+	cout << "Enter new file name: (Example: other.txt)" << endl;
+	// TODO: check for correct file name
+	char name[20];
+	cin.getline(name, 20);
+
+	ofstream MyFile(name);
+	write();
+	return true;
 }

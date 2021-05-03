@@ -21,7 +21,6 @@ private:
 
 	bool isNumber(const char symbol);
 	int charToInt(const char symbol);
-
 public:
 	const int MAX_DESCRIPTION_LENGTH = 150;
 	const int MAX_MANUFACTURER_LENGTH = 50;
@@ -50,6 +49,7 @@ public:
 	char* getComment();
 	Unit getUnit();
 
-	char* unitToString(const Unit unit);
+	int unitToNumber(const Unit unit);
+	void printUnit(const Unit unit);
 	Product& operator = (const Product& product);
 };
