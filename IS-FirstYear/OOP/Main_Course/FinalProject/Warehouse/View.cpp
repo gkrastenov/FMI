@@ -13,29 +13,9 @@ bool View::menu()
 	char consoleCommand[20];
 	cin.getline(consoleCommand, 20);
 
-	if (compareStrings(consoleCommand, "open", getSize(consoleCommand), 4))
+	if (compareStrings(consoleCommand, "add", getSize(consoleCommand), 3))
 	{
-		return file.open();
-	}
-	if (compareStrings(consoleCommand, "close", getSize(consoleCommand), 5))
-	{
-		return file.close();
-	}
-	if (compareStrings(consoleCommand, "save", getSize(consoleCommand), 4))
-	{
-		return file.save();
-	}
-	if (compareStrings(consoleCommand, "saveas", getSize(consoleCommand), 6))
-	{
-		return file.saveAs();
-	}
-	if (compareStrings(consoleCommand, "help", getSize(consoleCommand), 4))
-	{
-		return file.saveAs();
-	}
-	if (compareStrings(consoleCommand, "exit", getSize(consoleCommand), 4))
-	{
-		return file.exit();
+		return file.add();
 	}
 
 	return false;
@@ -44,10 +24,8 @@ bool View::menu()
 void View::menuView()
 {
 	cout << "-------- Menu --------" << endl;
-	cout << "Open (open)" << endl;
-	cout << "Close (close)" << endl;
-	cout << "Save (save)" << endl;
-	cout << "Save As (saveas)" << endl;
+	cout << "Add (add)" << endl;
+	cout << "Print (print)" << endl;
 	cout << "Help (help)" << endl;
 	cout << "Exit (exit)" << endl;
 }

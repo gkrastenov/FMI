@@ -3,10 +3,10 @@
 
 int main()
 {
-	View view =  View();
+	File file = File();
 	while (true)
 	{
-		if (view.menu() == false)
+		if (file.menu() == false)
 		{
 			break;
 		}

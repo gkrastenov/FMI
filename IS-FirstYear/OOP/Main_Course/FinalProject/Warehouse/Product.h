@@ -19,6 +19,9 @@ private:
 	int location;
 	char* comment;
 
+	bool isNumber(const char symbol);
+	int charToInt(const char symbol);
+
 public:
 	const int MAX_DESCRIPTION_LENGTH = 150;
 	const int MAX_MANUFACTURER_LENGTH = 50;
@@ -29,18 +32,24 @@ public:
 
 	void setDescription(const char* description);
 	void setManufacturer(const char* manufacturer);
-	void setExpiryDate(const char* expiryDate);
-	void setEntryDate(const char* entryDate);
+	bool setExpiryDate(const char* expiryDate);
+	bool setEntryDate(const char* entryDate);
+	void setExpiryDate(const DateTime& expiryDate);
+	void setEntryDate(const DateTime& entryDate);
 	void setQuantity(const int quantity);
 	void setLocation(const int location);
 	void setComment(const char* comment);
+	bool setUnit(const int unit);
 	
-
 	char* getDescription();
 	char* getManufacturer();
-	void getExpiryDate();
-	void getEntryDate();
+	DateTime& getExpiryDate();
+	DateTime& getEntryDate();
 	int getQuantity();
 	int getLocation();
 	char* getComment();
+	Unit getUnit();
+
+	char* unitToString(const Unit unit);
+	Product& operator = (const Product& product);
 };
