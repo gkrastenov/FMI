@@ -5,9 +5,9 @@
 #include <string>
 #include <chrono>
 #include <ctime>  
-#pragma warning(disable : 4996)
 #include "File.h"
 
+#pragma warning(disable : 4996)
 using namespace std;
 
 File::File()
@@ -163,91 +163,6 @@ bool File::print()
 	return true;
 }
 
-bool File::menu()
-{
-	menuView();
-
-	char consoleCommand[20];
-	cin.getline(consoleCommand, 20);
-
-	if (compareStrings(consoleCommand, "add", getSize(consoleCommand), 3))
-	{
-		if (add())
-		{
-			cout << "has been added new product" << endl;;
-			return true;
-		}
-		else {
-			cout << "Has not been added new product" << endl;;
-			return false;
-		}
-	}
-	if (compareStrings(consoleCommand, "exit", getSize(consoleCommand), 4))
-	{
-		return exit();
-	}
-	if (compareStrings(consoleCommand, "help", getSize(consoleCommand), 4))
-	{
-		return help();
-	}
-	if (compareStrings(consoleCommand, "save as", getSize(consoleCommand), 7))
-	{
-		return saveAs();
-	}
-	if (compareStrings(consoleCommand, "print", getSize(consoleCommand), 5))
-	{
-		return print();
-	}
-	if (compareStrings(consoleCommand, "clean", getSize(consoleCommand), 5))
-	{
-		return clean();
-	}
-
-	cout << "Invalid command" << endl;
-	return true;
-}
-
-void File::menuView()
-{
-	cout << "-------- Menu --------" << endl;
-	cout << "Add (add)" << endl;
-	cout << "Print (print)" << endl;
-	cout << "Exit (clean)" << endl;
-	cout << "Save As (save as)" << endl;
-	cout << "Help (help)" << endl;
-	cout << "Exit (exit)" << endl;
-}
-
-bool File::compareStrings(const char* input, const char* source,
-	const size_t inputSize, const size_t commandSize)
-{
-	if (inputSize != commandSize)
-	{
-		return false;
-	}
-
-	for (size_t i = 0; i < commandSize; i++)
-	{
-		if (input[i] != source[i])
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-size_t File::getSize(const char* source)
-{
-	int index = 0;
-	while (source[index] != '\0')
-	{
-		index++;
-	}
-
-	return index;
-}
-
 bool File::exit()
 {
 	cout << "Exit successfully." << endl;
@@ -281,8 +196,15 @@ bool File::saveAs()
 	char name[20];
 	cin.getline(name, 20);
 
+	if (isExists(name))
+	{
+		cout << "Exists file with this name:" << name << endl;
+		return false;
+	}
+	
 	ofstream MyFile(name);
 	write(name);
+
 	return true;
 }
 
@@ -305,6 +227,7 @@ bool File::clean()
 		index++;
 	}
 
+	write(fileName);
 	return true;
 }
 

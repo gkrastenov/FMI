@@ -64,7 +64,7 @@ void Product::setEntryDate(const DateTime& entryDate) {
 }
 
 bool Product::setExpiryDate(const char* expiryDate) {
-    int date[3];
+    int date[3] = { 0, 0, 0};
     int index = 0;
     int arrayIndex = 0;
     int curretNumber = 0;
@@ -83,7 +83,7 @@ bool Product::setExpiryDate(const char* expiryDate) {
             {
                 if (isNumber(expiryDate[arrayIndex]))
                 {
-                    curretNumber += pow(10, i-1) * charToInt(expiryDate[arrayIndex]);
+                    curretNumber += (int)pow(10, i-1) * charToInt(expiryDate[arrayIndex]);
                     arrayIndex++;
                 }
                 else {
@@ -100,7 +100,7 @@ bool Product::setExpiryDate(const char* expiryDate) {
             {
                 if (isNumber(expiryDate[arrayIndex]))
                 {
-                    curretNumber += pow(10, i - 1) * charToInt(expiryDate[arrayIndex]);
+                    curretNumber += (int)pow(10, i - 1) * charToInt(expiryDate[arrayIndex]);
                     arrayIndex++;
                 }
                 else {
@@ -117,7 +117,7 @@ bool Product::setExpiryDate(const char* expiryDate) {
 }
 
 bool Product::setEntryDate(const char* entryDate) {
-    int date[3];
+    int date[3] = { 0, 0, 0 };
     int index = 0;
     int arrayIndex = 0;
     int curretNumber = 0;
@@ -136,7 +136,7 @@ bool Product::setEntryDate(const char* entryDate) {
             {
                 if (isNumber(entryDate[arrayIndex]))
                 {
-                    curretNumber += pow(10, i - 1) * charToInt(entryDate[arrayIndex]);
+                    curretNumber += (int)pow(10, i - 1) * charToInt(entryDate[arrayIndex]);
                     arrayIndex++;
                 }
                 else {
@@ -153,7 +153,7 @@ bool Product::setEntryDate(const char* entryDate) {
             {
                 if (isNumber(entryDate[arrayIndex]))
                 {
-                    curretNumber += pow(10, i - 1) * charToInt(entryDate[arrayIndex]);
+                    curretNumber += (int)pow(10, i - 1) * charToInt(entryDate[arrayIndex]);
                     arrayIndex++;
                 }
                 else {
@@ -184,6 +184,7 @@ bool Product::setUnit(const int unit)
     this->unit = Unknown;
     return false;
 }
+
 char* Product::getDescription() {
     return this->description;
 }
@@ -252,6 +253,7 @@ void Product::printUnit(const Unit unit) {
         break;
     }
 }
+
 Unit Product::getUnit() {
     return unit;
 }
@@ -281,6 +283,7 @@ void Product::printProduct()
     cout << "Comment : ";
     cout << this->getComment() << endl;
 }
+
 Product& Product::operator = (const Product& product) {
     if (this != &product)
     {

@@ -18,8 +18,8 @@ private:
 public:
 	DateTime();
 	DateTime(const int year, const int month, const int day);
-	~DateTime();
 
+	// TODO: add const
 	int getDay();
 	int getMonth();
 	int getYear();

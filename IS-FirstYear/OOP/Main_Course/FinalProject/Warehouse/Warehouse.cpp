@@ -1,12 +1,12 @@
 #include <iostream>
-#include "View.h"
+#include "HomeView.h"
 
 int main()
 {
-	File file = File();
+	HomeView view = HomeView();
 	while (true)
 	{
-		if (file.menu() == false)
+		if (view.menu() == false)
 		{
 			break;
 		}

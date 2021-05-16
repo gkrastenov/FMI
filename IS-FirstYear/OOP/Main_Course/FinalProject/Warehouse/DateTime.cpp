@@ -2,6 +2,7 @@
 #include<iostream>
 
 using namespace std;
+
 DateTime::DateTime()
 {
     day = 0;
@@ -14,13 +15,6 @@ DateTime::DateTime(const int year, const int month, const int day)
 	this->day = day;
 	this->month = month;
 	this->year = year;
-}
-
-DateTime::~DateTime()
-{
-	day = 0;
-	month = 0;
-	year = 0;
 }
 
 int DateTime::getDay()

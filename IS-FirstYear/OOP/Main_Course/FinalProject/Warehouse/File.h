@@ -4,8 +4,6 @@
 class File
 {
 private:
-	size_t MAX_CONSOLE_COMMAND = 20;
-
 	char* fileName;
 	bool isOpen;
 	bool isCreated;
@@ -17,10 +15,6 @@ private:
 	char* enterString(const size_t length);
 	void write(const char* fileName);
 	void read();
-	void menuView();
-	bool compareStrings(const char* input, const char* source,
-		const size_t inputSize, const size_t commandSize);
-	size_t getSize(const char* source);
 	bool isExists(const char* fileName);
 public:
 	File();
@@ -35,7 +29,6 @@ public:
 	bool saveAs();
 	bool clean();
 
-	bool menu();
 	void setFileName(const char* name);
 	char* getFileName();
 };

@@ -141,12 +141,16 @@
   <ItemGroup>
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="FileService.cpp" />
+    <ClCompile Include="HomeView.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Warehouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="FileService.h" />
+    <ClInclude Include="HomeView.h" />
     <ClInclude Include="Product.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
